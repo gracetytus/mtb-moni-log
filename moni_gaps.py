@@ -15,6 +15,7 @@ if __name__ == '__main__':
     files = go.io.get_telemetry_binaries(args.start_time, args.end_time, data_dir=args.telemetry_dir)
 
     packet_ts = []
+    moni_gaps = []
 
     for f in tqdm(files, desc='Reading files..'):
         treader = go.io.TelemetryPacketReader(str(f))
@@ -26,6 +27,25 @@ if __name__ == '__main__':
                 if int(tp.packet_type) == 90:
                     packet_ts.append(gcu)
 
-    print(packet_ts[:100])
+
+    packet_ts.sort()
+    for i in range(1, len(packet_ts)):
+        start = packet_ts[i-1]
+        end = packet_ts[i]
+        duration = end - start
+
+        if duration >= args.window:
+            moni_gaps.append((start, end, duration))
+
+
+    print('-----------------------------------------------------------------------------------------0---')
+    print('Detected ' + len(moni_gaps)+ 'MTB outages with lenth greater than '+ args.window + ' seconds between' + args.start_time + ' to ' args.end_time)
+    for gap in moni_gaps:
+        print(f'from {gap[0]} to {gap[1]} with duration {gap[2]}')
+
+    print('--------------------------------------------------------------------------------------------')
+
+
+    
 
 
