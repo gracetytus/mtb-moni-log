@@ -37,7 +37,26 @@ if __name__ == '__main__':
                     #vccbram = moni.vccbram
                     #vccaux = moni.vccaux
 
-                    packet_ts.append((gcu, tiu_busy, daq_queue, temp, rate, lost_rate))
+                    mtb_hb = go.io.TofPacketType.MTBHeartbeat()
+                    mtb_hb.from_tofpacket(tp)
+                    total_elapsed = mtb_hb.total_elapsed
+                    n_events = mtb_hb.n_events
+                    evq_n_last = mtb_hb.evq_num_events_last
+                    n_ev_unsent = mtb_hb.n_ev_unsent
+                    n_ev_missed = mtb_hb.n_ev_missed
+
+                    evt_hb = go.io.TofPacketType.EVTBLDRHeartbeat()
+                    evt_hb.from_tofpacket(tp)
+                    n_mte_received = evt_hb.n_mte_received_tot
+                    n_rbe_received = evt_hb.n_rbe_received_tot
+                    n_mte_skipped = evt_hb.n_mte_skipped
+                    n_timed_out = evt_hb.n_timed_out
+                    cache_size = evt_hb.event_cache_size
+                    evt_id_cache_size = evt_hb.event_id_cache_size
+
+
+
+                    packet_ts.append((gcu, tiu_busy, daq_queue, temp, rate, lost_rate, total_elapsed, n_events, evq_n_last, n_ev_unsent, n_ev_missed, n_mte_received, n_rbe_received, n_mte_skipped, n_timed_out, cache_size, evt_id_cache_size))
 
 
     packet_ts.sort()
@@ -55,8 +74,21 @@ if __name__ == '__main__':
         #vbram = packet_ts[i-1][7]
         #vaux = packet_ts[i-1][8]
 
+        time_elapsed = packet_ts[i-1][6]
+        nevents = packet_ts[i-1][7]
+        evq = packet_ts[i-1][8]
+        ev_unsent = packet_ts[i-1][9]
+        ev_missed = packet_ts[i-1][10]
+        mte_rec = packet_ts[i-1][11]
+        rbe_rec = packet_ts[i-1][12]
+        mte_skipped = packet_ts[i-1][13]
+        time_out = packet_ts[i-1][14]
+        cache = packet_ts[i-1][15]
+        evt_id_cache = packet_ts[i-1][16]
+
+
         if duration >= args.window:
-            moni_gaps.append((start, end, duration, tiu, daq, t, r, lr))
+            moni_gaps.append((start, end, duration, tiu, daq, t, r, lr, time_elapsed, nevents, evq, ev_unsent, ev_missed, mte_rec, rbe_rec, mte_skipped, time_out, cache, evt_id_cache))
 
 
     print('--------------------------------------------------------------------------------------------')
@@ -68,6 +100,17 @@ if __name__ == '__main__':
         print(f'---the temperature before the crash was {gap[5]}')
         print(f'---the rate before the crash was {gap[6]}')
         print(f'---the lost rate before the crash was {gap[7]}')
+        print(f'---the elapsed time before the crash was {gap[8]}')
+        print(f'---the num. events received before the crash was {gap[9]}')
+        print(f'---the event queue size before the crash was {gap[10]}')
+        print(f'---the num. unsent events before the crash was {gap[11]}')
+        print(f'---the num. missed events before the crash was {gap[12]}')
+        print(f'---the MTEvent receiver len. before the crash was {gap[13]}')
+        print(f'---the RBEvent receiver len. before the crash was {gap[14]}')
+        print(f'---the num. MTEvents skipped before the crash was {gap[15]}')
+        print(f'---the num. timed out events before the crash was {gap[16]}')
+        print(f'---the cache size before the crash was {gap[17]}')
+        print(f'---the event ID cache size before the crash was {gap[18]}')
         #print(f'---the vccint before the crash was {gap[8]}')
         #print(f'---the vccbram before the crash was {gap[9]}')
         #print(f'---the vaux before the crash was {gap[10]}')
