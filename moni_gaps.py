@@ -19,7 +19,7 @@ if __name__ == '__main__':
     for f in tqdm(files, desc='Reading files..'):
         treader = go.io.TelemetryPacketReader(str(f))
         for packet in treader:
-            if int(packet.header.packet_type) ==90:
+            if int(packet.header.packet_type) == 92:
                 tp = go.io.TofPacket()
                 tp.from_bytestream(packet.payload, 0)
 
