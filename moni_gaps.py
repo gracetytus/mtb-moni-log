@@ -30,14 +30,14 @@ if __name__ == '__main__':
                     moni.from_tofpacket(tp)
                     tiu_busy = moni.tiu_busy_len
                     daq_queue = moni.daq_queue_len
-                    temp = moni.temp
+                    temp = moni.fpga_temp
                     rate = moni.rate
                     lost_rate = moni.lost_rate
-                    vccint = moni.vccint
-                    vccbram = moni.vccbram
-                    vccaux = moni.vccaux
+                    #vccint = moni.vccint
+                    #vccbram = moni.vccbram
+                    #vccaux = moni.vccaux
 
-                    packet_ts.append((gcu, tiu_busy, daq_queue, temp, lost_rate, vccint, vccbram, vccaux))
+                    packet_ts.append((gcu, tiu_busy, daq_queue, temp, rate, lost_rate))
 
 
     packet_ts.sort()
@@ -51,12 +51,12 @@ if __name__ == '__main__':
         t = packet_ts[i-1][3]
         r = packet_ts[i-1][4]
         lr = packet_ts[i-1][5]
-        vint = packet_ts[i-1][6]
-        vbram = packet_ts[i-1][7]
-        vaux = packet_ts[i-1][8]
+        #vint = packet_ts[i-1][6]
+        #vbram = packet_ts[i-1][7]
+        #vaux = packet_ts[i-1][8]
 
         if duration >= args.window:
-            moni_gaps.append((start, end, duration, tiu, daq, t, r, lr, vint, vbram, vaux))
+            moni_gaps.append((start, end, duration, tiu, daq, t, r, lr))
 
 
     print('--------------------------------------------------------------------------------------------')
@@ -68,9 +68,9 @@ if __name__ == '__main__':
         print(f'---the temperature before the crash was {gap[5]}')
         print(f'---the rate before the crash was {gap[6]}')
         print(f'---the lost rate before the crash was {gap[7]}')
-        print(f'---the vccint before the crash was {gap[8]}')
-        print(f'---the vccbram before the crash was {gap[9]}')
-        print(f'---the vaux before the crash was {gap[10]}')
+        #print(f'---the vccint before the crash was {gap[8]}')
+        #print(f'---the vccbram before the crash was {gap[9]}')
+        #print(f'---the vaux before the crash was {gap[10]}')
         print('------------------------------------------------')
 
     print('--------------------------------------------------------------------------------------------')
