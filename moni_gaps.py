@@ -40,13 +40,13 @@ if __name__ == '__main__':
 
 
     print('-----------------------------------------------------------------------------------------0---')
-    print('Detected ' + len(moni_gaps)+ 'MTB outages with lenth greater than '+ args.window + ' seconds between' + args.start_time + ' to ' args.end_time)
+    print('Detected ' + str(len(moni_gaps))+ 'MTB outages with lenth greater than '+ str(args.window) + ' seconds between' + str(args.start_time) + ' to '+ str(args.end_time))
     for gap in moni_gaps:
         print(f'from {gap[0]} to {gap[1]} with duration {gap[2]}')
 
     print('--------------------------------------------------------------------------------------------')
 
 
-    
+    print(packet_ts[1]) 
 
 
