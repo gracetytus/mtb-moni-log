@@ -25,27 +25,32 @@ if __name__ == '__main__':
                 tp = go.io.TofPacket()
                 tp.from_bytestream(packet.payload, 0)
                 if int(tp.packet_type) == 90:
-                    packet_ts.append(gcu)
+
+                    moni = go.commands.MTBMoni()
+                    moni.from_tofpacket(tp)
+                    tiu_busy = moni.tiu_busy_len()
+
+                    packet_ts.append((gcu, tiu_busy))
 
 
     packet_ts.sort()
     for i in range(1, len(packet_ts)):
-        start = packet_ts[i-1]
-        end = packet_ts[i]
+        start = packet_ts[i-1][0]
+        end = packet_ts[i][0]
         duration = end - start
 
+        tiu = packet_ts[i-1][1]
+
         if duration >= args.window:
-            moni_gaps.append((start, end, duration))
+            moni_gaps.append((start, end, duration, tiu))
 
 
     print('--------------------------------------------------------------------------------------------')
     print('Detected ' + str(len(moni_gaps))+ ' MTB outages with lenth greater than '+ str(args.window) + ' seconds between ' + str(args.start_time) + ' to '+ str(args.end_time) + ' seconds')
     for gap in moni_gaps:
         print(f'from {gap[0]} to {gap[1]} with duration {gap[2]}')
+        print(f'the tiu_busy_count before the crash was {gap[3]}')
 
     print('--------------------------------------------------------------------------------------------')
-
-
-    print(packet_ts[1]) 
 
 
