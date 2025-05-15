@@ -19,14 +19,13 @@ if __name__ == '__main__':
     for f in tqdm(files, desc='Reading files..'):
         treader = go.io.TelemetryPacketReader(str(f))
         for packet in treader:
+            gcu = packet.header.gcu_time()
             if int(packet.header.packet_type) == 92:
                 tp = go.io.TofPacket()
                 tp.from_bytestream(packet.payload, 0)
-
                 if tp.packet_type == 90:
-                    packet_ts.append(packet.header.gcu_time())
+                    packet_ts.append(gcu)
 
-    for ts in packet_ts[:10]:
-        print(ts)
+    print(packet_ts)
 
 
