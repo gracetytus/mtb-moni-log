@@ -21,6 +21,7 @@ if __name__ == '__main__':
         treader = go.io.TelemetryPacketReader(str(f))
         for packet in treader:
             gcu = packet.header.timestamnp
+            gcu = gcu/((1000/64)+1631030675)
             if int(packet.header.packet_type) == 92:
                 tp = go.io.TofPacket()
                 tp.from_bytestream(packet.payload, 0)
