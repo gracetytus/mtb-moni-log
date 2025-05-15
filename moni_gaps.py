@@ -38,7 +38,7 @@ if __name__ == '__main__':
                     #vccaux = moni.vccaux
 
                     mtb_hb = go.tof.monitoring.MTBHeartbeat()
-                    #mtb_hb.from_tofpacket(tp)
+                    mtb_hb.from_tofpacket(packet)
                     total_elapsed = mtb_hb.total_elapsed
                     n_events = mtb_hb.n_events
                     evq_n_last = mtb_hb.evq_num_events_last
@@ -46,7 +46,7 @@ if __name__ == '__main__':
                     n_ev_missed = mtb_hb.n_ev_missed
 
                     evt_hb = go.tof.monitoring.EVTBLDRHeartbeat()
-                    #evt_hb.from_tofpacket(tp)
+                    evt_hb.from_tofpacket(packet)
                     n_mte_received = evt_hb.n_mte_received_tot
                     n_rbe_received = evt_hb.n_rbe_received_tot
                     n_mte_skipped = evt_hb.n_mte_skipped
