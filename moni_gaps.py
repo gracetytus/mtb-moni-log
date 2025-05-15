@@ -26,4 +26,7 @@ if __name__ == '__main__':
                 if tp.packet_type == 90:
                     packet_ts.append(packet.header.gcu_time())
 
+    for ts in packet_ts[:10]:
+        print(ts)
+
 
