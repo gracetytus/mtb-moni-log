@@ -37,22 +37,22 @@ if __name__ == '__main__':
                     #vccbram = moni.vccbram
                     #vccaux = moni.vccaux
 
-                    mtb_hb = go.io.TofPacketType.MTBHeartbeat()
-                    mtb_hb.from_tofpacket(tp)
+                    mtb_hb = go.tof.monitoring.MTBHeartbeat()
+                    #mtb_hb.from_tofpacket(tp)
                     total_elapsed = mtb_hb.total_elapsed
                     n_events = mtb_hb.n_events
                     evq_n_last = mtb_hb.evq_num_events_last
                     n_ev_unsent = mtb_hb.n_ev_unsent
                     n_ev_missed = mtb_hb.n_ev_missed
 
-                    evt_hb = go.io.TofPacketType.EVTBLDRHeartbeat()
-                    evt_hb.from_tofpacket(tp)
+                    evt_hb = go.tof.monitoring.EVTBLDRHeartbeat()
+                    #evt_hb.from_tofpacket(tp)
                     n_mte_received = evt_hb.n_mte_received_tot
                     n_rbe_received = evt_hb.n_rbe_received_tot
                     n_mte_skipped = evt_hb.n_mte_skipped
                     n_timed_out = evt_hb.n_timed_out
                     cache_size = evt_hb.event_cache_size
-                    evt_id_cache_size = evt_hb.event_id_cache_size
+                    evt_id_cache_size = evt_hb.event_cache_size
 
 
 
