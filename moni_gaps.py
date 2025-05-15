@@ -23,7 +23,7 @@ if __name__ == '__main__':
             if int(packet.header.packet_type) == 92:
                 tp = go.io.TofPacket()
                 tp.from_bytestream(packet.payload, 0)
-                if tp.packet_type == 60:
+                if int(tp.packet_type) == 90:
                     packet_ts.append(gcu)
 
     print(packet_ts[:100])
