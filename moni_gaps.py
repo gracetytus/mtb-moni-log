@@ -15,15 +15,15 @@ if __name__ == '__main__':
     files = go.io.get_telemetry_binaries(args.start_time, args.end_time, data_dir=args.telemetry_dir)
 
     packet_ts = []
+
     for f in tqdm(files, desc='Reading files..'):
         treader = go.io.TelemetryPacketReader(str(f))
         for packet in treader:
-            if packet.header.packet_type == go.io.TelemetryPacketType.AnyTofHK: 
+            if int(packet.header.packet_type) ==90:
                 tp = go.io.TofPacket()
                 tp.from_bytestream(packet.payload, 0)
 
-                if tp.packet_type == go.io.TofPacketType.MTBMoni in packet:
-                    ts = packet.header.gcu_time()
-                    packet_ts.append(ts)
+                if tp.packet_type == 90:
+                    packet_ts.append(packet.header.gcu_time())
 
 
