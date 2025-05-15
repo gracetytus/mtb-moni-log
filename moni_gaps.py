@@ -20,8 +20,7 @@ if __name__ == '__main__':
     for f in tqdm(files, desc='Reading files..'):
         treader = go.io.TelemetryPacketReader(str(f))
         for packet in treader:
-            gcu = packet.header.timestamnp
-            gcu = gcu/((1000/64)+1631030675)
+            gcu = packet.header.gcutime
             if int(packet.header.packet_type) == 92:
                 tp = go.io.TofPacket()
                 tp.from_bytestream(packet.payload, 0)
@@ -39,8 +38,8 @@ if __name__ == '__main__':
             moni_gaps.append((start, end, duration))
 
 
-    print('-----------------------------------------------------------------------------------------0---')
-    print('Detected ' + str(len(moni_gaps))+ 'MTB outages with lenth greater than '+ str(args.window) + ' seconds between' + str(args.start_time) + ' to '+ str(args.end_time))
+    print('--------------------------------------------------------------------------------------------')
+    print('Detected ' + str(len(moni_gaps))+ ' MTB outages with lenth greater than '+ str(args.window) + ' seconds between ' + str(args.start_time) + ' to '+ str(args.end_time) + ' seconds')
     for gap in moni_gaps:
         print(f'from {gap[0]} to {gap[1]} with duration {gap[2]}')
 
