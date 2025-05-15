@@ -26,9 +26,9 @@ if __name__ == '__main__':
                 tp.from_bytestream(packet.payload, 0)
                 if int(tp.packet_type) == 90:
 
-                    moni = go.commands.MTBMoni()
+                    moni = go.tof.monitoring.MtbMoniData()
                     moni.from_tofpacket(tp)
-                    tiu_busy = moni.tiu_busy_len()
+                    tiu_busy = moni.tiu_busy_len
 
                     packet_ts.append((gcu, tiu_busy))
 
