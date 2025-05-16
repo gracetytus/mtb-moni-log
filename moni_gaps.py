@@ -55,7 +55,7 @@ if __name__ == '__main__':
     
     for i in range(len(moni_gaps)):
         t_start = moni_gaps[i][0]
-        new_bins = go.io.get_telemetry_binaries((t_start - 300), t_start, data_dir=files)
+        new_bins = go.io.get_telemetry_binaries((t_start - 300), t_start, data_dir=args.telemetry_dir)
 
         evt_hb_list = []
         mtb_hb_list = []
@@ -69,12 +69,12 @@ if __name__ == '__main__':
                   
                     if int(tp_hb.packet_type) == 62: #MTBHeartbeat
                         mtb_hb = go.tof.monitoring.MTBHeartbeat()
-                        mtb_hb.from_tofpacket(p)
+                        mtb_hb.from_tofpacket(tp_hb)
                         mtb_hb_list.append(mtb_hb)
                     
-                    if int(tp_hb.header.packet_type) == 63: #EVTBLDRHeartbeat
+                    if int(tp_hb.packet_type) == 63: #EVTBLDRHeartbeat
                         evt_hb = go.tof.monitoring.EVTBLDRHeartbeat()
-                        evt_hb.from_tofpacket(p)
+                        evt_hb.from_tofpacket(tp_hb)
                         evt_hb_list.append(evt_hb)
         if mtb_hb_list:
             mtb_hb = mtb_hb_list[-1]
