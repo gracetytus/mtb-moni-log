@@ -13,7 +13,6 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     files = go.io.get_telemetry_binaries(args.start_time, args.end_time, data_dir=args.telemetry_dir)
-
     packet_ts = []
     moni_gaps = []
 
@@ -33,30 +32,8 @@ if __name__ == '__main__':
                     temp = moni.fpga_temp
                     rate = moni.rate
                     lost_rate = moni.lost_rate
-                    #vccint = moni.vccint
-                    #vccbram = moni.vccbram
-                    #vccaux = moni.vccaux
 
-                    mtb_hb = go.tof.monitoring.MTBHeartbeat()
-                    mtb_hb.from_tofpacket(packet)
-                    total_elapsed = mtb_hb.total_elapsed
-                    n_events = mtb_hb.n_events
-                    evq_n_last = mtb_hb.evq_num_events_last
-                    n_ev_unsent = mtb_hb.n_ev_unsent
-                    n_ev_missed = mtb_hb.n_ev_missed
-
-                    evt_hb = go.tof.monitoring.EVTBLDRHeartbeat()
-                    evt_hb.from_tofpacket(packet)
-                    n_mte_received = evt_hb.n_mte_received_tot
-                    n_rbe_received = evt_hb.n_rbe_received_tot
-                    n_mte_skipped = evt_hb.n_mte_skipped
-                    n_timed_out = evt_hb.n_timed_out
-                    cache_size = evt_hb.event_cache_size
-                    evt_id_cache_size = evt_hb.event_cache_size
-
-
-
-                    packet_ts.append((gcu, tiu_busy, daq_queue, temp, rate, lost_rate, total_elapsed, n_events, evq_n_last, n_ev_unsent, n_ev_missed, n_mte_received, n_rbe_received, n_mte_skipped, n_timed_out, cache_size, evt_id_cache_size))
+                    packet_ts.append((gcu, tiu_busy, daq_queue, temp, rate, lost_rate)) #total_elapsed, n_events, evq_n_last, n_ev_unsent, n_ev_missed, n_mte_received, n_rbe_received, n_mte_skipped, n_timed_out, cache_size, evt_id_cache_size))
 
 
     packet_ts.sort()
@@ -70,26 +47,63 @@ if __name__ == '__main__':
         t = packet_ts[i-1][3]
         r = packet_ts[i-1][4]
         lr = packet_ts[i-1][5]
-        #vint = packet_ts[i-1][6]
-        #vbram = packet_ts[i-1][7]
-        #vaux = packet_ts[i-1][8]
-
-        time_elapsed = packet_ts[i-1][6]
-        nevents = packet_ts[i-1][7]
-        evq = packet_ts[i-1][8]
-        ev_unsent = packet_ts[i-1][9]
-        ev_missed = packet_ts[i-1][10]
-        mte_rec = packet_ts[i-1][11]
-        rbe_rec = packet_ts[i-1][12]
-        mte_skipped = packet_ts[i-1][13]
-        time_out = packet_ts[i-1][14]
-        cache = packet_ts[i-1][15]
-        evt_id_cache = packet_ts[i-1][16]
 
 
         if duration >= args.window:
-            moni_gaps.append((start, end, duration, tiu, daq, t, r, lr, time_elapsed, nevents, evq, ev_unsent, ev_missed, mte_rec, rbe_rec, mte_skipped, time_out, cache, evt_id_cache))
+            moni_gaps.append((start, end, duration, tiu, daq, t, r, lr)) #time_elapsed, nevents, evq, ev_unsent, ev_missed, mte_rec, rbe_rec, mte_skipped, time_out, cache, evt_id_cache))
 
+    
+    for i in range(len(moni_gaps)):
+        t_start = moni_gaps[i][0]
+        new_bins = go.io.get_telemetry_binaries((t_start - 300), t_start, data_dir=files)
+
+        evt_hb_list = []
+        mtb_hb_list = []
+
+        for binary in new_bins:
+            treader = go.io.TelemetryPacketReader(str(binary))
+            for p in treader:
+                if int(p.header.packet_type) == 92: #AnyTofHKP
+                    tp_hb = go.io.TofPacket()
+                    tp_hb.from_bytestream(p.payload, 0)
+                  
+                    if int(tp_hb.packet_type) == 62: #MTBHeartbeat
+                        mtb_hb = go.tof.monitoring.MTBHeartbeat()
+                        mtb_hb.from_tofpacket(p)
+                        mtb_hb_list.append(mtb_hb)
+                    
+                    if int(tp_hb.header.packet_type) == 63: #EVTBLDRHeartbeat
+                        evt_hb = go.tof.monitoring.EVTBLDRHeartbeat()
+                        evt_hb.from_tofpacket(p)
+                        evt_hb_list.append(evt_hb)
+        if mtb_hb_list:
+            mtb_hb = mtb_hb_list[-1]
+            mtb_data = (
+                mtb_hb.total_elapsed,
+                mtb_hb.n_events,
+                mtb_hb.evq_num_events_last,
+                mtb_hb.n_ev_unsent,
+                mtb_hb.n_ev_missed
+                )
+        else:
+            mtb_data = (None, None, None, None, None)
+
+ 
+        if evt_hb_list:
+            evt_hb = evt_hb_list[-1]
+            evt_data = (
+                evt_hb.n_mte_received_tot,
+                evt_hb.n_rbe_received_tot,
+                evt_hb.n_mte_skipped,
+                evt_hb.n_timed_out,
+                evt_hb.event_cache_size,
+                evt_hb.event_cache_size
+            )
+        else:
+            evt_data = (None, None, None, None, None, None)
+
+        moni_gaps[i] = (*moni_gaps[i], mtb_data, evt_data)
+                                          
 
     print('--------------------------------------------------------------------------------------------')
     print('Detected ' + str(len(moni_gaps))+ ' MTB outages with lenth greater than '+ str(args.window) + ' seconds between ' + str(args.start_time) + ' to '+ str(args.end_time) + ' seconds')
