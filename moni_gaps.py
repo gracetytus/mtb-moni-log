@@ -32,8 +32,11 @@ if __name__ == '__main__':
                     temp = moni.fpga_temp
                     rate = moni.rate
                     lost_rate = moni.lost_rate
+                    aux = moni.vccaux
+                    bram = moni.vccbram
+                    vint = moni.vccint
 
-                    packet_ts.append((gcu, tiu_busy, daq_queue, temp, rate, lost_rate)) #total_elapsed, n_events, evq_n_last, n_ev_unsent, n_ev_missed, n_mte_received, n_rbe_received, n_mte_skipped, n_timed_out, cache_size, evt_id_cache_size))
+                    packet_ts.append((gcu, tiu_busy, daq_queue, temp, rate, lost_rate, aux, bram, vint)) #total_elapsed, n_events, evq_n_last, n_ev_unsent, n_ev_missed, n_mte_received, n_rbe_received, n_mte_skipped, n_timed_out, cache_size, evt_id_cache_size))
 
 
     packet_ts.sort()
@@ -47,10 +50,12 @@ if __name__ == '__main__':
         t = packet_ts[i-1][3]
         r = packet_ts[i-1][4]
         lr = packet_ts[i-1][5]
-
+        vaux = packet_ts[i-1][6]
+        vbram = packet_ts[i-1][7]
+        vvint = packet_ts[i-1][8]
 
         if duration >= args.window:
-            moni_gaps.append((start, end, duration, tiu, daq, t, r, lr)) #time_elapsed, nevents, evq, ev_unsent, ev_missed, mte_rec, rbe_rec, mte_skipped, time_out, cache, evt_id_cache))
+            moni_gaps.append((start, end, duration, tiu, daq, t, r, lr, vaux, vbram, vvint)) #time_elapsed, nevents, evq, ev_unsent, ev_missed, mte_rec, rbe_rec, mte_skipped, time_out, cache, evt_id_cache))
 
     
     for i in range(len(moni_gaps)):
@@ -104,33 +109,37 @@ if __name__ == '__main__':
 
         moni_gaps[i] = (*moni_gaps[i], mtb_data, evt_data)
                                           
-
     print('--------------------------------------------------------------------------------------------')
-    print('Detected ' + str(len(moni_gaps))+ ' MTB outages with lenth greater than '+ str(args.window) + ' seconds between ' + str(args.start_time) + ' to '+ str(args.end_time) + ' seconds')
+    print('--------------------------------------------------------------------------------------------')
+    print('Detected ' + str(len(moni_gaps))+ ' MTB outages with lenth greater than '+ str(args.window) + ' seconds between ' + str(args.start_time) + ' to '+ str(args.end_time))
+    print('--------------------------------------------------------------------------------------------')
+    print('--------------------------------------------------------------------------------------------')
     for gap in moni_gaps:
-        print(f'from {gap[0]} to {gap[1]} with duration {gap[2]}')
+        print(f'from {gap[0]} to {gap[1]} with duration {gap[2]} seconds')
+        print('')
         print(f'---the tiu_busy_count before the crash was {gap[3]}')
         print(f'---the daq queue length before the crash was {gap[4]}')
         print(f'---the temperature before the crash was {gap[5]}')
         print(f'---the rate before the crash was {gap[6]}')
         print(f'---the lost rate before the crash was {gap[7]}')
-
-        print(f'---the elapsed time before the crash was {gap[8][0]}')
-        print(f'---the num. events received before the crash was {gap[8][1]}')
-        print(f'---the event queue size before the crash was {gap[8][2]}')
-        print(f'---the num. unsent events before the crash was {gap[8][3]}')
-        print(f'---the num. missed events before the crash was {gap[8][4]}')
-
-        print(f'---the MTEvent receiver len. before the crash was {gap[9][0]}')
-        print(f'---the RBEvent receiver len. before the crash was {gap[9][1]}')
-        print(f'---the num. MTEvents skipped before the crash was {gap[9][2]}')
-        print(f'---the num. timed out events before the crash was {gap[9][3]}')
-        print(f'---the cache size before the crash was {gap[9][4]}')
-        print(f'---the event ID cache size before the crash was {gap[9][5]}')
-        #print(f'---the vccint before the crash was {gap[8]}')
-        #print(f'---the vccbram before the crash was {gap[9]}')
-        #print(f'---the vaux before the crash was {gap[10]}')
-        print('------------------------------------------------')
+        print('')
+        print(f'---the elapsed time before the crash was {gap[11][0]}')
+        print(f'---the num. events received before the crash was {gap[11][1]}')
+        print(f'---the event queue size before the crash was {gap[11][2]}')
+        print(f'---the num. unsent events before the crash was {gap[11][3]}')
+        print(f'---the num. missed events before the crash was {gap[11][4]}')
+        print('')
+        print(f'---the MTEvent receiver len. before the crash was {gap[12][0]}')
+        print(f'---the RBEvent receiver len. before the crash was {gap[12][1]}')
+        print(f'---the num. MTEvents skipped before the crash was {gap[12][2]}')
+        print(f'---the num. timed out events before the crash was {gap[12][3]}')
+        print(f'---the cache size before the crash was {gap[12][4]}')
+        print(f'---the event ID cache size before the crash was {gap[12][5]}')
+        print('')
+        print(f'---the vccint before the crash was {gap[8]}')
+        print(f'---the vccbram before the crash was {gap[9]}')
+        print(f'---the vccaux before the crash was {gap[10]}')
+        print('--------------------------------------------------------------------------------------------')
 
     print('--------------------------------------------------------------------------------------------')
 
