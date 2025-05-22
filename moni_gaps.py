@@ -3,6 +3,7 @@ import numpy as np
 from tqdm import tqdm
 import argparse
 import matplotlib.pyplot as plt
+from datetime import datetime, UTC
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Searching for gaps in MTBMoni data packets to indicate MTB outages')
@@ -41,6 +42,15 @@ if __name__ == '__main__':
 
     packet_ts.sort()
     hdurations = []
+
+    dt_start = datetime.fromtimestamp(args.start_time, UTC)
+    dt_end = datetime.fromtimestamp(args.end_time, UTC)
+    dt1 = datetime.fromtimestamp(packet_ts[0][0], UTC)
+    dt2 = datetime.fromtimestamp(packet_ts[-1][0], UTC)
+    
+    #print(f'the start time was {dt_start.strftime('%Y-%m-%d %H:%M:%S UTC')} and the first MTBMoniData was received {dt1.strftime('%Y-%m-%d %H:%M:%S UTC')}')
+    #print(f'the end time was {dt_end.strftime('%Y-%m-%d %H:%M:%S UTC')} and the last MTBMoniData was received {dt2.strftime('%Y-%m-%d %H:%M:%S UTC')}')
+
     for i in range(1, len(packet_ts)):
         start = packet_ts[i-1][0]
         end = packet_ts[i][0]
@@ -115,9 +125,11 @@ if __name__ == '__main__':
     output_file = f'{args.start_time}_{args.end_time}_mtb_outages_report.txt'  
 
     with open(output_file, 'w') as f:
+        f.write(f'the start time was {dt_start.strftime('%Y-%m-%d %H:%M:%S UTC')} and the first MTBMoniData was received {dt1.strftime('%Y-%m-%d %H:%M:%S UTC')}')
+        f.write(f'the end time was {dt_end.strftime('%Y-%m-%d %H:%M:%S UTC')} and the last MTBMoniData was received {dt2.strftime('%Y-%m-%d %H:%M:%S UTC')}')
         f.write('--------------------------------------------------------------------------------------------\n')
         f.write(f'Detected {len(moni_gaps)} MTB outages with length greater than {args.window} seconds between {args.start_time} to {args.end_time} seconds\n')
-
+        f.write('')
         for gap in moni_gaps:
             f.write(f'from {gap[0]} to {gap[1]} with duration {gap[2]}\n')
             f.write(f'---the tiu_busy_count before the crash was {gap[3]}\n')
@@ -125,20 +137,24 @@ if __name__ == '__main__':
             f.write(f'---the temperature before the crash was {gap[5]}\n')
             f.write(f'---the rate before the crash was {gap[6]}\n')
             f.write(f'---the lost rate before the crash was {gap[7]}\n')
-
-            f.write(f'---the elapsed time before the crash was {gap[8][0]}\n')
-            f.write(f'---the num. events received before the crash was {gap[8][1]}\n')
-            f.write(f'---the event queue size before the crash was {gap[8][2]}\n')
-            f.write(f'---the num. unsent events before the crash was {gap[8][3]}\n')
-            f.write(f'---the num. missed events before the crash was {gap[8][4]}\n')
-
-            f.write(f'---the MTEvent receiver len. before the crash was {gap[9][0]}\n')
-            f.write(f'---the RBEvent receiver len. before the crash was {gap[9][1]}\n')
-            f.write(f'---the num. MTEvents skipped before the crash was {gap[9][2]}\n')
-            f.write(f'---the num. timed out events before the crash was {gap[9][3]}\n')
-            f.write(f'---the cache size before the crash was {gap[9][4]}\n')
-            f.write(f'---the event ID cache size before the crash was {gap[9][5]}\n')
-            f.write('------------------------------------------------\n')
+            f.write('')
+            f.write(f'---the elapsed time before the crash was {gap[11][0]}\n')
+            f.write(f'---the num. events received before the crash was {gap[11][1]}\n')
+            f.write(f'---the event queue size before the crash was {gap[11][2]}\n')
+            f.write(f'---the num. unsent events before the crash was {gap[11][3]}\n')
+            f.write(f'---the num. missed events before the crash was {gap[11][4]}\n')
+            f.write('')
+            f.write(f'---the MTEvent receiver len. before the crash was {gap[12][0]}\n')
+            f.write(f'---the RBEvent receiver len. before the crash was {gap[12][1]}\n')
+            f.write(f'---the num. MTEvents skipped before the crash was {gap[12][2]}\n')
+            f.write(f'---the num. timed out events before the crash was {gap[12][3]}\n')
+            f.write(f'---the cache size before the crash was {gap[12][4]}\n')
+            f.write(f'---the event ID cache size before the crash was {gap[12][5]}\n')
+            f.write('')
+            f.write(f'---the vcc aux before the crash was {gap[8]}\n')
+            f.write(f'---the vcc aux before the crash was {gap[9]}\n')
+            f.write(f'---the vcc aux before the crash was {gap[10]}\n')
+            f.write('-------------------------------------------------------------------------------------------\n')
 
         f.write('--------------------------------------------------------------------------------------------\n')
 
@@ -150,5 +166,7 @@ if __name__ == '__main__':
     plt.title(f'\u0394t between MTBMoniData')
     plt.ylabel('n')
     plt.xlabel('seconds')
+    plt.minorticks_on()
     plt.savefig(f'{args.start_time}_to_{args.end_time}_MTBMoniData_Interval.pdf')
+    fig, ax = plt.subplots()
 
