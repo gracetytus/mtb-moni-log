@@ -110,39 +110,40 @@ if __name__ == '__main__':
 
         moni_gaps[i] = (*moni_gaps[i], mtb_data, evt_data)
                                           
-    print('--------------------------------------------------------------------------------------------')
-    print('--------------------------------------------------------------------------------------------')
-    print('Detected ' + str(len(moni_gaps))+ ' MTB outages with lenth greater than '+ str(args.window) + ' seconds between ' + str(args.start_time) + ' to '+ str(args.end_time))
-    print('--------------------------------------------------------------------------------------------')
-    print('--------------------------------------------------------------------------------------------')
-    for gap in moni_gaps:
-        print(f'from {gap[0]} to {gap[1]} with duration {gap[2]} seconds')
-        print('')
-        print(f'---the tiu_busy_count before the crash was {gap[3]}')
-        print(f'---the daq queue length before the crash was {gap[4]}')
-        print(f'---the temperature before the crash was {gap[5]}')
-        print(f'---the rate before the crash was {gap[6]}')
-        print(f'---the lost rate before the crash was {gap[7]}')
-        print('')
-        print(f'---the elapsed time before the crash was {gap[11][0]}')
-        print(f'---the num. events received before the crash was {gap[11][1]}')
-        print(f'---the event queue size before the crash was {gap[11][2]}')
-        print(f'---the num. unsent events before the crash was {gap[11][3]}')
-        print(f'---the num. missed events before the crash was {gap[11][4]}')
-        print('')
-        print(f'---the MTEvent receiver len. before the crash was {gap[12][0]}')
-        print(f'---the RBEvent receiver len. before the crash was {gap[12][1]}')
-        print(f'---the num. MTEvents skipped before the crash was {gap[12][2]}')
-        print(f'---the num. timed out events before the crash was {gap[12][3]}')
-        print(f'---the cache size before the crash was {gap[12][4]}')
-        print(f'---the event ID cache size before the crash was {gap[12][5]}')
-        print('')
-        print(f'---the vccint before the crash was {gap[8]}')
-        print(f'---the vccbram before the crash was {gap[9]}')
-        print(f'---the vccaux before the crash was {gap[10]}')
-        print('--------------------------------------------------------------------------------------------')
 
-    print('--------------------------------------------------------------------------------------------')
+
+    output_file = f'{args.start_time}_{args.end_time}_mtb_outages_report.txt'  
+
+    with open(output_file, 'w') as f:
+        f.write('--------------------------------------------------------------------------------------------\n')
+        f.write(f'Detected {len(moni_gaps)} MTB outages with length greater than {args.window} seconds between {args.start_time} to {args.end_time} seconds\n')
+
+        for gap in moni_gaps:
+            f.write(f'from {gap[0]} to {gap[1]} with duration {gap[2]}\n')
+            f.write(f'---the tiu_busy_count before the crash was {gap[3]}\n')
+            f.write(f'---the daq queue length before the crash was {gap[4]}\n')
+            f.write(f'---the temperature before the crash was {gap[5]}\n')
+            f.write(f'---the rate before the crash was {gap[6]}\n')
+            f.write(f'---the lost rate before the crash was {gap[7]}\n')
+
+            f.write(f'---the elapsed time before the crash was {gap[8][0]}\n')
+            f.write(f'---the num. events received before the crash was {gap[8][1]}\n')
+            f.write(f'---the event queue size before the crash was {gap[8][2]}\n')
+            f.write(f'---the num. unsent events before the crash was {gap[8][3]}\n')
+            f.write(f'---the num. missed events before the crash was {gap[8][4]}\n')
+
+            f.write(f'---the MTEvent receiver len. before the crash was {gap[9][0]}\n')
+            f.write(f'---the RBEvent receiver len. before the crash was {gap[9][1]}\n')
+            f.write(f'---the num. MTEvents skipped before the crash was {gap[9][2]}\n')
+            f.write(f'---the num. timed out events before the crash was {gap[9][3]}\n')
+            f.write(f'---the cache size before the crash was {gap[9][4]}\n')
+            f.write(f'---the event ID cache size before the crash was {gap[9][5]}\n')
+            f.write('------------------------------------------------\n')
+
+        f.write('--------------------------------------------------------------------------------------------\n')
+
+    print('Detected ' + str(len(moni_gaps))+ ' MTB outages with lenth greater than '+ str(args.window) + ' seconds between ' + str(args.start_time) + ' to '+ str(args.end_time))
+    print(f"Additional output written to {output_file}")
 
     plt.hist(hdurations, bins=100, histtype = 'step')
     plt.yscale('log')
