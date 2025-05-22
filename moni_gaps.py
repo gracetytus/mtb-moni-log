@@ -4,6 +4,10 @@ from tqdm import tqdm
 import argparse
 import matplotlib.pyplot as plt
 from datetime import datetime, UTC
+import gc
+import tracemalloc
+
+tracemalloc.start()
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Searching for gaps in MTBMoni data packets to indicate MTB outages')
@@ -68,6 +72,10 @@ if __name__ == '__main__':
 
         if duration >= args.window:
             moni_gaps.append((start, end, duration, tiu, daq, t, r, lr, vaux, vbram, vvint)) 
+
+        
+    packet_ts.clear
+    gc.collect()
     
     for i in range(len(moni_gaps)):
         t_start = moni_gaps[i][0]
@@ -168,5 +176,10 @@ if __name__ == '__main__':
     plt.xlabel('seconds')
     plt.minorticks_on()
     plt.savefig(f'{args.start_time}_to_{args.end_time}_MTBMoniData_Interval.pdf')
-    fig, ax = plt.subplots()
+
+    current, peak = tracemalloc.get_traced_memory()
+    print(f"\nCurrent memory usage: {current / 10**6:.2f} MB")
+    print(f"Peak memory usage: {peak / 10**6:.2f} MB")
+
+    tracemalloc.stop()
 
