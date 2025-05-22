@@ -2,6 +2,7 @@ import gaps_online as go
 import numpy as np
 from tqdm import tqdm
 import argparse
+import matplotlib.pyplot as plt
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Searching for gaps in MTBMoni data packets to indicate MTB outages')
@@ -36,14 +37,15 @@ if __name__ == '__main__':
                     bram = moni.vccbram
                     vint = moni.vccint
 
-                    packet_ts.append((gcu, tiu_busy, daq_queue, temp, rate, lost_rate, aux, bram, vint)) #total_elapsed, n_events, evq_n_last, n_ev_unsent, n_ev_missed, n_mte_received, n_rbe_received, n_mte_skipped, n_timed_out, cache_size, evt_id_cache_size))
-
+                    packet_ts.append((gcu, tiu_busy, daq_queue, temp, rate, lost_rate, aux, bram, vint)) 
 
     packet_ts.sort()
+    hdurations = []
     for i in range(1, len(packet_ts)):
         start = packet_ts[i-1][0]
         end = packet_ts[i][0]
         duration = end - start
+        hdurations.append(duration)
 
         tiu = packet_ts[i-1][1]
         daq = packet_ts[i-1][2]
@@ -55,8 +57,7 @@ if __name__ == '__main__':
         vvint = packet_ts[i-1][8]
 
         if duration >= args.window:
-            moni_gaps.append((start, end, duration, tiu, daq, t, r, lr, vaux, vbram, vvint)) #time_elapsed, nevents, evq, ev_unsent, ev_missed, mte_rec, rbe_rec, mte_skipped, time_out, cache, evt_id_cache))
-
+            moni_gaps.append((start, end, duration, tiu, daq, t, r, lr, vaux, vbram, vvint)) 
     
     for i in range(len(moni_gaps)):
         t_start = moni_gaps[i][0]
@@ -143,4 +144,10 @@ if __name__ == '__main__':
 
     print('--------------------------------------------------------------------------------------------')
 
+    plt.hist(hdurations, bins=100, histtype = 'step')
+    plt.yscale('log')
+    plt.title(f'\u0394t between MTBMoniData')
+    plt.ylabel('n')
+    plt.xlabel('seconds')
+    plt.savefig(f'{args.start_time}_to_{args.end_time}_MTBMoniData_Interval.pdf')
 
