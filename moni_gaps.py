@@ -81,9 +81,11 @@ if __name__ == '__main__':
         evt_hb_list = []
         mtb_hb_list = []
 
+
         for binary in new_bins:
             treader = go.io.TelemetryPacketReader(str(binary))
             for p in treader:
+                gcu0 = p.header.gcutime
                 if int(p.header.packet_type) == 92: #AnyTofHKP
                     tp_hb = go.io.TofPacket()
                     tp_hb.from_bytestream(p.payload, 0)
@@ -91,14 +93,23 @@ if __name__ == '__main__':
                     if int(tp_hb.packet_type) == 62: #MTBHeartbeat
                         mtb_hb = go.tof.monitoring.MTBHeartbeat()
                         mtb_hb.from_tofpacket(tp_hb)
-                        mtb_hb_list.append(mtb_hb)
+                        mtb_hb_list.append((gcu0,mtb_hb))
                     
                     if int(tp_hb.packet_type) == 63: #EVTBLDRHeartbeat
                         evt_hb = go.tof.monitoring.EVTBLDRHeartbeat()
                         evt_hb.from_tofpacket(tp_hb)
-                        evt_hb_list.append(evt_hb)
+                        evt_hb_list.append((gcu0, evt_hb))
+
+
+        evt_hb_list.sort()
+        mtb_hb_list.sort()
+
+        j=0
+        while (j < len(mtb_hb_list)) and (mtb_hb_list[j][0] < t_start):
+            j += 1
+
         if mtb_hb_list:
-            mtb_hb = mtb_hb_list[-1]
+            mtb_hb = mtb_hb_list[j-1][1]
             mtb_data = (
                 mtb_hb.total_elapsed,
                 mtb_hb.n_events,
@@ -109,9 +120,14 @@ if __name__ == '__main__':
         else:
             mtb_data = (None, None, None, None, None)
 
- 
+
+        i=0
+        while (i < len(evt_hb_list)) and (evt_hb_list[i][0] < t_start):
+            i += 1
+
+
         if evt_hb_list:
-            evt_hb = evt_hb_list[-1]
+            evt_hb = evt_hb_list[i-1][1]
             evt_data = (
                 evt_hb.n_mte_received_tot,
                 evt_hb.n_rbe_received_tot,
@@ -124,9 +140,13 @@ if __name__ == '__main__':
             evt_data = (None, None, None, None, None, None)
 
         moni_gaps[i] = (*moni_gaps[i], mtb_data, evt_data)
-                                          
 
 
+    evt_hb_list.clear()
+    gc.collect()
+    mtb_hb_list.clear()
+    gc.collect()
+    
     output_file = f'/home/gtytus/mtb-moni-log/reports/12Dec/{args.start_time}_{args.end_time}_mtb_outages_report.txt'  
 
     with open(output_file, 'w') as f:
