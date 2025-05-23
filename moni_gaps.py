@@ -5,9 +5,6 @@ import argparse
 import matplotlib.pyplot as plt
 from datetime import datetime, UTC
 import gc
-import tracemalloc
-
-tracemalloc.start()
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Searching for gaps in MTBMoni data packets to indicate MTB outages')
@@ -130,10 +127,10 @@ if __name__ == '__main__':
                                           
 
 
-    output_file = f'{args.start_time}_{args.end_time}_mtb_outages_report.txt'  
+    output_file = f'/home/gtytus/mtb-moni-log/reports/12Dec/{args.start_time}_{args.end_time}_mtb_outages_report.txt'  
 
     with open(output_file, 'w') as f:
-        f.write(f'the start time was {dt_start.strftime('%Y-%m-%d %H:%M:%S UTC')} and the first MTBMoniData was received {dt1.strftime('%Y-%m-%d %H:%M:%S UTC')}')
+        f.write(f'the start time was {dt_start.strftime('%Y-%m-%d %H:%M:%S UTC')} and the first MTBMoniData was received {dt1.strftime('%Y-%m-%d %H:%M:%S UTC')}\n')
         f.write(f'the end time was {dt_end.strftime('%Y-%m-%d %H:%M:%S UTC')} and the last MTBMoniData was received {dt2.strftime('%Y-%m-%d %H:%M:%S UTC')}')
         f.write('--------------------------------------------------------------------------------------------\n')
         f.write(f'Detected {len(moni_gaps)} MTB outages with length greater than {args.window} seconds between {args.start_time} to {args.end_time} seconds\n')
@@ -175,11 +172,5 @@ if __name__ == '__main__':
     plt.ylabel('n')
     plt.xlabel('seconds')
     plt.minorticks_on()
-    plt.savefig(f'{args.start_time}_to_{args.end_time}_MTBMoniData_Interval.pdf')
-
-    current, peak = tracemalloc.get_traced_memory()
-    print(f"\nCurrent memory usage: {current / 10**6:.2f} MB")
-    print(f"Peak memory usage: {peak / 10**6:.2f} MB")
-
-    tracemalloc.stop()
+    plt.savefig(f'/home/gtytus/mtb-moni-log/reports/12Dec/{args.start_time}_to_{args.end_time}_MTBMoniData_Interval.pdf')
 
