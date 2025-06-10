@@ -12,6 +12,7 @@ if __name__ == '__main__':
     parser.add_argument('-s','--start-time', type=int, default=-1, help='The run start time, e.g. as taken from the elog')
     parser.add_argument('-e','--end-time',type=int, default=-1, help='The run end time, e.g. as taken from the elog')
     parser.add_argument('-w', '--window', type = int, help = 'the window for which missing MTBMoni packets would constitute an outage')
+    parser.add_argument('-d', '--date', help = 'the date in the format 11Dec for December 11, 02Dec for December 2, etc')
 
     args = parser.parse_args()
 
@@ -38,8 +39,9 @@ if __name__ == '__main__':
                     aux = moni.vccaux
                     bram = moni.vccbram
                     vint = moni.vccint
+                    status = moni.tiu_ignore_busy
 
-                    packet_ts.append((gcu, tiu_busy, daq_queue, temp, rate, lost_rate, aux, bram, vint)) 
+                    packet_ts.append((gcu, tiu_busy, daq_queue, temp, rate, lost_rate, aux, bram, vint, status)) 
 
     packet_ts.sort()
     hdurations = []
@@ -66,9 +68,10 @@ if __name__ == '__main__':
         vaux = packet_ts[i-1][6]
         vbram = packet_ts[i-1][7]
         vvint = packet_ts[i-1][8]
+        stat = packet_ts[i-1][9]
 
         if duration >= args.window:
-            moni_gaps.append((start, end, duration, tiu, daq, t, r, lr, vaux, vbram, vvint)) 
+            moni_gaps.append((start, end, duration, tiu, daq, t, r, lr, vaux, vbram, vvint, stat)) 
 
         
     packet_ts.clear
@@ -127,38 +130,39 @@ if __name__ == '__main__':
                                           
 
 
-    output_file = f'/home/gtytus/mtb-moni-log/reports/12Dec/{args.start_time}_{args.end_time}_mtb_outages_report.txt'  
+    output_file = f'/home/gtytus/mtb-moni-log/reports/{args.date}/{args.start_time}_{args.end_time}_mtb_outages_report.txt'  
 
     with open(output_file, 'w') as f:
         f.write(f'the start time was {dt_start.strftime('%Y-%m-%d %H:%M:%S UTC')} and the first MTBMoniData was received {dt1.strftime('%Y-%m-%d %H:%M:%S UTC')}\n')
-        f.write(f'the end time was {dt_end.strftime('%Y-%m-%d %H:%M:%S UTC')} and the last MTBMoniData was received {dt2.strftime('%Y-%m-%d %H:%M:%S UTC')}')
+        f.write(f'the end time was {dt_end.strftime('%Y-%m-%d %H:%M:%S UTC')} and the last MTBMoniData was received {dt2.strftime('%Y-%m-%d %H:%M:%S UTC')}\n')
         f.write('--------------------------------------------------------------------------------------------\n')
         f.write(f'Detected {len(moni_gaps)} MTB outages with length greater than {args.window} seconds between {args.start_time} to {args.end_time} seconds\n')
         f.write('')
         for gap in moni_gaps:
             f.write(f'from {gap[0]} to {gap[1]} with duration {gap[2]}\n')
+            f.write(f'------tiu_ignore_busy = {gap[11]}------\n')
             f.write(f'---the tiu_busy_count before the crash was {gap[3]}\n')
             f.write(f'---the daq queue length before the crash was {gap[4]}\n')
             f.write(f'---the temperature before the crash was {gap[5]}\n')
             f.write(f'---the rate before the crash was {gap[6]}\n')
             f.write(f'---the lost rate before the crash was {gap[7]}\n')
             f.write('')
-            f.write(f'---the elapsed time before the crash was {gap[11][0]}\n')
-            f.write(f'---the num. events received before the crash was {gap[11][1]}\n')
-            f.write(f'---the event queue size before the crash was {gap[11][2]}\n')
-            f.write(f'---the num. unsent events before the crash was {gap[11][3]}\n')
-            f.write(f'---the num. missed events before the crash was {gap[11][4]}\n')
+            f.write(f'---the elapsed time before the crash was {gap[12][0]}\n')
+            f.write(f'---the num. events received before the crash was {gap[12][1]}\n')
+            f.write(f'---the event queue size before the crash was {gap[12][2]}\n')
+            f.write(f'---the num. unsent events before the crash was {gap[12][3]}\n')
+            f.write(f'---the num. missed events before the crash was {gap[12][4]}\n')
             f.write('')
-            f.write(f'---the MTEvent receiver len. before the crash was {gap[12][0]}\n')
-            f.write(f'---the RBEvent receiver len. before the crash was {gap[12][1]}\n')
-            f.write(f'---the num. MTEvents skipped before the crash was {gap[12][2]}\n')
-            f.write(f'---the num. timed out events before the crash was {gap[12][3]}\n')
-            f.write(f'---the cache size before the crash was {gap[12][4]}\n')
-            f.write(f'---the event ID cache size before the crash was {gap[12][5]}\n')
+            f.write(f'---the MTEvent receiver len. before the crash was {gap[13][0]}\n')
+            f.write(f'---the RBEvent receiver len. before the crash was {gap[13][1]}\n')
+            f.write(f'---the num. MTEvents skipped before the crash was {gap[13][2]}\n')
+            f.write(f'---the num. timed out events before the crash was {gap[13][3]}\n')
+            f.write(f'---the cache size before the crash was {gap[13][4]}\n')
+            f.write(f'---the event ID cache size before the crash was {gap[13][5]}\n')
             f.write('')
             f.write(f'---the vcc aux before the crash was {gap[8]}\n')
-            f.write(f'---the vcc aux before the crash was {gap[9]}\n')
-            f.write(f'---the vcc aux before the crash was {gap[10]}\n')
+            f.write(f'---the vcc bram before the crash was {gap[9]}\n')
+            f.write(f'---the vcc int before the crash was {gap[10]}\n')
             f.write('-------------------------------------------------------------------------------------------\n')
 
         f.write('--------------------------------------------------------------------------------------------\n')
@@ -172,5 +176,5 @@ if __name__ == '__main__':
     plt.ylabel('n')
     plt.xlabel('seconds')
     plt.minorticks_on()
-    plt.savefig(f'/home/gtytus/mtb-moni-log/reports/12Dec/{args.start_time}_to_{args.end_time}_MTBMoniData_Interval.pdf')
+    plt.savefig(f'/home/gtytus/mtb-moni-log/reports/{args.date}/{args.start_time}_to_{args.end_time}_MTBMoniData_Interval.pdf')
 
