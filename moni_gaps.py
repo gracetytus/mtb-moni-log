@@ -111,7 +111,7 @@ if __name__ == '__main__':
         while (j < len(mtb_hb_list)) and (mtb_hb_list[j][0] < t_start):
             j += 1
 
-        if mtb_hb_list:
+        if mtb_hb_list and j > 0:
             mtb_hb = mtb_hb_list[j-1][1]
             mtb_data = (
                 mtb_hb.total_elapsed,
@@ -119,18 +119,18 @@ if __name__ == '__main__':
                 mtb_hb.evq_num_events_last,
                 mtb_hb.n_ev_unsent,
                 mtb_hb.n_ev_missed
-                )
+            )
         else:
             mtb_data = (None, None, None, None, None)
 
 
-        i=0
-        while (i < len(evt_hb_list)) and (evt_hb_list[i][0] < t_start):
-            i += 1
+        evt_i = 0
+        while (evt_i < len(evt_hb_list)) and (evt_hb_list[evt_i][0] < t_start):
+            evt_i += 1
 
 
-        if evt_hb_list:
-            evt_hb = evt_hb_list[i-1][1]
+        if evt_hb_list and evt_i > 0:
+            evt_hb = evt_hb_list[evt_i-1][1]
             evt_data = (
                 evt_hb.n_mte_received_tot,
                 evt_hb.n_rbe_received_tot,
@@ -150,7 +150,7 @@ if __name__ == '__main__':
     mtb_hb_list.clear()
     gc.collect()
     
-    output_file = f'/home/gtytus/mtb-moni-log/reports/12Dec/{args.start_time}_{args.end_time}_mtb_outages_report.txt'  
+    output_file = f'/home/gtytus/mtb-moni-log/reports/{args.date}/{args.start_time}_{args.end_time}_mtb_outages_report.txt'  
 
 
     with open(output_file, 'w') as f:
