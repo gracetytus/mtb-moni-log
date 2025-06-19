@@ -36,6 +36,8 @@ def mtb_rate_plot(data : list):
     ax.plot(times, l_rates, lw=0.8, alpha=0.7, label='lost rate')
     ax.legend(loc='upper right', frameon=False)
     ax.set_title(f'MTB rates', loc='right')
+    ax.axvline(start_time, color='black', linestyle='--', lw=1.2, label='gap start')
+    ax.axvline(end_time, color='black', linestyle='--', lw=1.2, label='gap end')
     return fig
 
 if __name__ == '__main__':
