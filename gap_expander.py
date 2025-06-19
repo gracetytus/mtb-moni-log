@@ -53,7 +53,7 @@ if __name__ == '__main__':
     
 
     for start_time, end_time in outage_unix_time_list:
-        files = go.io.get_telemetry_binaries(start_time, end_time, data_dir=args.telemetry_dir)
+        files = go.io.get_telemetry_binaries(start_time -600, end_time -600, data_dir=args.telemetry_dir)
         mtb_moni_series = []
 
         for f in tqdm(files, desc=f"Processing files from {start_time} to {end_time}"):
