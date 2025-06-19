@@ -145,14 +145,13 @@ if __name__ == '__main__':
         moni_gaps[i] = (*moni_gaps[i], mtb_data, evt_data)
 
 
-<<<<<<< HEAD
     evt_hb_list.clear()
     gc.collect()
     mtb_hb_list.clear()
     gc.collect()
     
     output_file = f'/home/gtytus/mtb-moni-log/reports/12Dec/{args.start_time}_{args.end_time}_mtb_outages_report.txt'  
->>>>>>> b2ff53c14d40b0029b6cf0be3a7a67423fa81718
+
 
     with open(output_file, 'w') as f:
         f.write(f'the start time was {dt_start.strftime('%Y-%m-%d %H:%M:%S UTC')} and the first MTBMoniData was received {dt1.strftime('%Y-%m-%d %H:%M:%S UTC')}\n')
