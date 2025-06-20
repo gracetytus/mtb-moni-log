@@ -22,7 +22,7 @@ def parse_outage_times(file_path):
                 outages.append((start_time, end_time))
     return outages
 
-def mtb_rate_plot(data : list):
+def mtb_rate_plot(data: list, start_time: float, end_time: float):
     plt.style.use('publication.rc')
     fig, ax = plt.subplots()
     ax.set_ylabel('Hz', loc='top')
@@ -55,7 +55,7 @@ if __name__ == '__main__':
     
 
     for start_time, end_time in outage_unix_time_list:
-        files = go.io.get_telemetry_binaries(start_time -600, end_time -600, data_dir=args.telemetry_dir)
+        files = go.io.get_telemetry_binaries(start_time -600, end_time +600, data_dir=args.telemetry_dir)
         mtb_moni_series = []
 
         for f in tqdm(files, desc=f"Processing files from {start_time} to {end_time}"):
@@ -71,7 +71,7 @@ if __name__ == '__main__':
                         mtb_moni_series.append((pack.header.gcutime, mtb_moni))
 
         if mtb_moni_series:
-            fig0 = mtb_rate_plot(mtb_moni_series)
+            fig0 = mtb_rate_plot(mtb_moni_series, start_time, end_time)
             outfile = outdir / f'{int(start_time)}_{int(end_time)}_mtb_rates.pdf'
             fig0.savefig(outfile)
             plt.close(fig0)

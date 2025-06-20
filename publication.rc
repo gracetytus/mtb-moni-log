@@ -1,6 +1,6 @@
-text.usetex : True
+text.usetex : False
 font.family : serif
-font.serif : astrosym
+//font.serif : astrosym
 font.size : 8
 axes.labelsize : 8
 savefig.bbox : tight
