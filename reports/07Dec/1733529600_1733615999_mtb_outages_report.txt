@@ -1,0 +1,511 @@
+the start time was 2024-12-07 00:00:00 UTC and the first MTBMoniData was received 2024-12-07 01:29:56 UTC
+the end time was 2024-12-07 23:59:59 UTC and the last MTBMoniData was received 2024-12-07 23:37:05 UTC
+--------------------------------------------------------------------------------------------
+Detected 23 MTB outages with length greater than 60 seconds between 1733529600 to 1733615999 seconds
+from 1733535195.064 to 1733535790.776 with duration 595.712000131607
+------tiu_ignore_busy = False------
+---the tiu_busy_count before the crash was 240
+---the daq queue length before the crash was 0
+---the temperature before the crash was 58.44488525390625
+---the rate before the crash was 316
+---the lost rate before the crash was 796
+---the elapsed time before the crash was 197
+---the num. events received before the crash was 75240
+---the event queue size before the crash was 0
+---the num. unsent events before the crash was 0
+---the num. missed events before the crash was 7496
+---the MTEvent receiver len. before the crash was 79163
+---the RBEvent receiver len. before the crash was 236567
+---the num. MTEvents skipped before the crash was 7485
+---the num. timed out events before the crash was 10492
+---the cache size before the crash was 6382
+---the event ID cache size before the crash was 6382
+---the vcc aux before the crash was 3.697265625
+---the vcc bram before the crash was 1.939453125
+---the vcc int before the crash was 1.93798828125
+-------------------------------------------------------------------------------------------
+from 1733535911.8 to 1733536686.904 with duration 775.1040000915527
+------tiu_ignore_busy = False------
+---the tiu_busy_count before the crash was 6720
+---the daq queue length before the crash was 8191
+---the temperature before the crash was 58.56793212890625
+---the rate before the crash was 682
+---the lost rate before the crash was 22
+---the elapsed time before the crash was None
+---the num. events received before the crash was None
+---the event queue size before the crash was None
+---the num. unsent events before the crash was None
+---the num. missed events before the crash was None
+---the MTEvent receiver len. before the crash was None
+---the RBEvent receiver len. before the crash was None
+---the num. MTEvents skipped before the crash was None
+---the num. timed out events before the crash was None
+---the cache size before the crash was None
+---the event ID cache size before the crash was None
+---the vcc aux before the crash was 3.7001953125
+---the vcc bram before the crash was 1.939453125
+---the vcc int before the crash was 1.939453125
+-------------------------------------------------------------------------------------------
+from 1733536807.928 to 1733537056.888 with duration 248.96000003814697
+------tiu_ignore_busy = False------
+---the tiu_busy_count before the crash was 230
+---the daq queue length before the crash was 8191
+---the temperature before the crash was 58.44488525390625
+---the rate before the crash was 633
+---the lost rate before the crash was 24
+---the elapsed time before the crash was 142
+---the num. events received before the crash was 1566
+---the event queue size before the crash was 0
+---the num. unsent events before the crash was 0
+---the num. missed events before the crash was 90947
+---the MTEvent receiver len. before the crash was None
+---the RBEvent receiver len. before the crash was None
+---the num. MTEvents skipped before the crash was None
+---the num. timed out events before the crash was None
+---the cache size before the crash was None
+---the event ID cache size before the crash was None
+---the vcc aux before the crash was 3.70166015625
+---the vcc bram before the crash was 1.939453125
+---the vcc int before the crash was 1.939453125
+-------------------------------------------------------------------------------------------
+from 1733537056.888 to 1733537118.328 with duration 61.44000005722046
+------tiu_ignore_busy = False------
+---the tiu_busy_count before the crash was 240
+---the daq queue length before the crash was 5431
+---the temperature before the crash was 58.56793212890625
+---the rate before the crash was 656
+---the lost rate before the crash was 57
+---the elapsed time before the crash was 142
+---the num. events received before the crash was 1566
+---the event queue size before the crash was 0
+---the num. unsent events before the crash was 0
+---the num. missed events before the crash was 90947
+---the MTEvent receiver len. before the crash was None
+---the RBEvent receiver len. before the crash was None
+---the num. MTEvents skipped before the crash was None
+---the num. timed out events before the crash was None
+---the cache size before the crash was None
+---the event ID cache size before the crash was None
+---the vcc aux before the crash was 3.70166015625
+---the vcc bram before the crash was 1.939453125
+---the vcc int before the crash was 1.939453125
+-------------------------------------------------------------------------------------------
+from 1733537400.248 to 1733537507.64 with duration 107.39200019836426
+------tiu_ignore_busy = False------
+---the tiu_busy_count before the crash was 4870
+---the daq queue length before the crash was 8191
+---the temperature before the crash was 58.198822021484375
+---the rate before the crash was 652
+---the lost rate before the crash was 31
+---the elapsed time before the crash was 122
+---the num. events received before the crash was 70119
+---the event queue size before the crash was 0
+---the num. unsent events before the crash was 0
+---the num. missed events before the crash was 9666
+---the MTEvent receiver len. before the crash was 63034
+---the RBEvent receiver len. before the crash was 197533
+---the num. MTEvents skipped before the crash was 9661
+---the num. timed out events before the crash was 35834
+---the cache size before the crash was 9182
+---the event ID cache size before the crash was 9182
+---the vcc aux before the crash was 3.7001953125
+---the vcc bram before the crash was 1.939453125
+---the vcc int before the crash was 1.939453125
+-------------------------------------------------------------------------------------------
+from 1733537628.6 to 1733537715.384 with duration 86.78400015830994
+------tiu_ignore_busy = False------
+---the tiu_busy_count before the crash was 230
+---the daq queue length before the crash was 8191
+---the temperature before the crash was 58.198822021484375
+---the rate before the crash was 614
+---the lost rate before the crash was 19
+---the elapsed time before the crash was 142
+---the num. events received before the crash was 1644
+---the event queue size before the crash was 8191
+---the num. unsent events before the crash was 0
+---the num. missed events before the crash was 0
+---the MTEvent receiver len. before the crash was 63034
+---the RBEvent receiver len. before the crash was 197533
+---the num. MTEvents skipped before the crash was 9661
+---the num. timed out events before the crash was 35834
+---the cache size before the crash was 9182
+---the event ID cache size before the crash was 9182
+---the vcc aux before the crash was 3.7001953125
+---the vcc bram before the crash was 1.939453125
+---the vcc int before the crash was 1.939453125
+-------------------------------------------------------------------------------------------
+from 1733537836.408 to 1733538410.168 with duration 573.7599999904633
+------tiu_ignore_busy = False------
+---the tiu_busy_count before the crash was 8320
+---the daq queue length before the crash was 8191
+---the temperature before the crash was 58.198822021484375
+---the rate before the crash was 652
+---the lost rate before the crash was 35
+---the elapsed time before the crash was 142
+---the num. events received before the crash was 1644
+---the event queue size before the crash was 8191
+---the num. unsent events before the crash was 0
+---the num. missed events before the crash was 0
+---the MTEvent receiver len. before the crash was 63034
+---the RBEvent receiver len. before the crash was 197533
+---the num. MTEvents skipped before the crash was 9661
+---the num. timed out events before the crash was 35834
+---the cache size before the crash was 9182
+---the event ID cache size before the crash was 9182
+---the vcc aux before the crash was 3.70166015625
+---the vcc bram before the crash was 1.939453125
+---the vcc int before the crash was 1.93798828125
+-------------------------------------------------------------------------------------------
+from 1733538542.2 to 1733538639.608 with duration 97.4079999923706
+------tiu_ignore_busy = False------
+---the tiu_busy_count before the crash was 230
+---the daq queue length before the crash was 8191
+---the temperature before the crash was 58.198822021484375
+---the rate before the crash was 686
+---the lost rate before the crash was 26
+---the elapsed time before the crash was 142
+---the num. events received before the crash was 1629
+---the event queue size before the crash was 8190
+---the num. unsent events before the crash was 0
+---the num. missed events before the crash was 0
+---the MTEvent receiver len. before the crash was None
+---the RBEvent receiver len. before the crash was None
+---the num. MTEvents skipped before the crash was None
+---the num. timed out events before the crash was None
+---the cache size before the crash was None
+---the event ID cache size before the crash was None
+---the vcc aux before the crash was 3.7001953125
+---the vcc bram before the crash was 1.939453125
+---the vcc int before the crash was 1.939453125
+-------------------------------------------------------------------------------------------
+from 1733538815.672 to 1733544778.104 with duration 5962.432000160217
+------tiu_ignore_busy = False------
+---the tiu_busy_count before the crash was 230
+---the daq queue length before the crash was 0
+---the temperature before the crash was 57.829681396484375
+---the rate before the crash was 629
+---the lost rate before the crash was 21
+---the elapsed time before the crash was 177
+---the num. events received before the crash was 37197
+---the event queue size before the crash was 0
+---the num. unsent events before the crash was 0
+---the num. missed events before the crash was 78264
+---the MTEvent receiver len. before the crash was 38065
+---the RBEvent receiver len. before the crash was 97703
+---the num. MTEvents skipped before the crash was 78258
+---the num. timed out events before the crash was 16345
+---the cache size before the crash was 8979
+---the event ID cache size before the crash was 8979
+---the vcc aux before the crash was 3.70166015625
+---the vcc bram before the crash was 1.939453125
+---the vcc int before the crash was 1.939453125
+-------------------------------------------------------------------------------------------
+from 1733544778.104 to 1733546284.792 with duration 1506.6879999637604
+------tiu_ignore_busy = False------
+---the tiu_busy_count before the crash was 230
+---the daq queue length before the crash was 0
+---the temperature before the crash was 55.738006591796875
+---the rate before the crash was 0
+---the lost rate before the crash was 1495
+---the elapsed time before the crash was None
+---the num. events received before the crash was None
+---the event queue size before the crash was None
+---the num. unsent events before the crash was None
+---the num. missed events before the crash was None
+---the MTEvent receiver len. before the crash was None
+---the RBEvent receiver len. before the crash was None
+---the num. MTEvents skipped before the crash was None
+---the num. timed out events before the crash was None
+---the cache size before the crash was None
+---the event ID cache size before the crash was None
+---the vcc aux before the crash was 3.70166015625
+---the vcc bram before the crash was 1.939453125
+---the vcc int before the crash was 1.939453125
+-------------------------------------------------------------------------------------------
+from 1733546284.792 to 1733547513.912 with duration 1229.119999885559
+------tiu_ignore_busy = True------
+---the tiu_busy_count before the crash was 240
+---the daq queue length before the crash was 0
+---the temperature before the crash was 56.476226806640625
+---the rate before the crash was 0
+---the lost rate before the crash was 18
+---the elapsed time before the crash was None
+---the num. events received before the crash was None
+---the event queue size before the crash was None
+---the num. unsent events before the crash was None
+---the num. missed events before the crash was None
+---the MTEvent receiver len. before the crash was None
+---the RBEvent receiver len. before the crash was None
+---the num. MTEvents skipped before the crash was None
+---the num. timed out events before the crash was None
+---the cache size before the crash was None
+---the event ID cache size before the crash was None
+---the vcc aux before the crash was 3.7001953125
+---the vcc bram before the crash was 1.939453125
+---the vcc int before the crash was 1.939453125
+-------------------------------------------------------------------------------------------
+from 1733548448.888 to 1733555959.352 with duration 7510.463999986649
+------tiu_ignore_busy = True------
+---the tiu_busy_count before the crash was 957580
+---the daq queue length before the crash was 0
+---the temperature before the crash was 57.2144775390625
+---the rate before the crash was 767
+---the lost rate before the crash was 71
+---the elapsed time before the crash was 255
+---the num. events received before the crash was 201422
+---the event queue size before the crash was 0
+---the num. unsent events before the crash was 0
+---the num. missed events before the crash was 80
+---the MTEvent receiver len. before the crash was 205372
+---the RBEvent receiver len. before the crash was 578902
+---the num. MTEvents skipped before the crash was 60
+---the num. timed out events before the crash was 30639
+---the cache size before the crash was 5545
+---the event ID cache size before the crash was 5545
+---the vcc aux before the crash was 3.697265625
+---the vcc bram before the crash was 1.93798828125
+---the vcc int before the crash was 1.93798828125
+-------------------------------------------------------------------------------------------
+from 1733556380.664 to 1733556445.688 with duration 65.0239999294281
+------tiu_ignore_busy = True------
+---the tiu_busy_count before the crash was 240
+---the daq queue length before the crash was 0
+---the temperature before the crash was 59.79833984375
+---the rate before the crash was 784
+---the lost rate before the crash was 77
+---the elapsed time before the crash was 107
+---the num. events received before the crash was 73246
+---the event queue size before the crash was 0
+---the num. unsent events before the crash was 0
+---the num. missed events before the crash was 11840
+---the MTEvent receiver len. before the crash was 81114
+---the RBEvent receiver len. before the crash was 239408
+---the num. MTEvents skipped before the crash was 11832
+---the num. timed out events before the crash was 9254
+---the cache size before the crash was 5547
+---the event ID cache size before the crash was 5547
+---the vcc aux before the crash was 3.697265625
+---the vcc bram before the crash was 1.93798828125
+---the vcc int before the crash was 1.93798828125
+-------------------------------------------------------------------------------------------
+from 1733556445.688 to 1733556509.88 with duration 64.19200015068054
+------tiu_ignore_busy = True------
+---the tiu_busy_count before the crash was 230
+---the daq queue length before the crash was 0
+---the temperature before the crash was 59.79833984375
+---the rate before the crash was 802
+---the lost rate before the crash was 68
+---the elapsed time before the crash was 122
+---the num. events received before the crash was 85127
+---the event queue size before the crash was 0
+---the num. unsent events before the crash was 0
+---the num. missed events before the crash was 11840
+---the MTEvent receiver len. before the crash was 89101
+---the RBEvent receiver len. before the crash was 264256
+---the num. MTEvents skipped before the crash was 11832
+---the num. timed out events before the crash was 10024
+---the cache size before the crash was 5535
+---the event ID cache size before the crash was 5535
+---the vcc aux before the crash was 3.69580078125
+---the vcc bram before the crash was 1.93798828125
+---the vcc int before the crash was 1.93798828125
+-------------------------------------------------------------------------------------------
+from 1733560106.744 to 1733560167.224 with duration 60.480000019073486
+------tiu_ignore_busy = True------
+---the tiu_busy_count before the crash was 6730
+---the daq queue length before the crash was 0
+---the temperature before the crash was 63.61260986328125
+---the rate before the crash was 680
+---the lost rate before the crash was 91
+---the elapsed time before the crash was 2732
+---the num. events received before the crash was 2078384
+---the event queue size before the crash was 0
+---the num. unsent events before the crash was 0
+---the num. missed events before the crash was 12595
+---the MTEvent receiver len. before the crash was 2081940
+---the RBEvent receiver len. before the crash was 6314185
+---the num. MTEvents skipped before the crash was 12378
+---the num. timed out events before the crash was 200546
+---the cache size before the crash was 5077
+---the event ID cache size before the crash was 5077
+---the vcc aux before the crash was 3.7001953125
+---the vcc bram before the crash was 1.939453125
+---the vcc int before the crash was 1.93798828125
+-------------------------------------------------------------------------------------------
+from 1733560385.912 to 1733560452.088 with duration 66.17600011825562
+------tiu_ignore_busy = True------
+---the tiu_busy_count before the crash was 6730
+---the daq queue length before the crash was 1
+---the temperature before the crash was 63.61260986328125
+---the rate before the crash was 729
+---the lost rate before the crash was 62
+---the elapsed time before the crash was 2792
+---the num. events received before the crash was 2122634
+---the event queue size before the crash was 0
+---the num. unsent events before the crash was 0
+---the num. missed events before the crash was 12611
+---the MTEvent receiver len. before the crash was 2118854
+---the RBEvent receiver len. before the crash was 6424965
+---the num. MTEvents skipped before the crash was 12387
+---the num. timed out events before the crash was 203739
+---the cache size before the crash was 5252
+---the event ID cache size before the crash was 5252
+---the vcc aux before the crash was 3.7001953125
+---the vcc bram before the crash was 1.939453125
+---the vcc int before the crash was 1.939453125
+-------------------------------------------------------------------------------------------
+from 1733561034.744 to 1733561118.072 with duration 83.32800006866455
+------tiu_ignore_busy = True------
+---the tiu_busy_count before the crash was 240
+---the daq queue length before the crash was 1
+---the temperature before the crash was 65.70428466796875
+---the rate before the crash was 772
+---the lost rate before the crash was 61
+---the elapsed time before the crash was 4607
+---the num. events received before the crash was 3457995
+---the event queue size before the crash was 0
+---the num. unsent events before the crash was 0
+---the num. missed events before the crash was 13064
+---the MTEvent receiver len. before the crash was 3465170
+---the RBEvent receiver len. before the crash was 10476668
+---the num. MTEvents skipped before the crash was 12709
+---the num. timed out events before the crash was 324095
+---the cache size before the crash was 5113
+---the event ID cache size before the crash was 5113
+---the vcc aux before the crash was 3.7001953125
+---the vcc bram before the crash was 1.939453125
+---the vcc int before the crash was 1.939453125
+-------------------------------------------------------------------------------------------
+from 1733563227.192 to 1733563311.352 with duration 84.16000008583069
+------tiu_ignore_busy = True------
+---the tiu_busy_count before the crash was 411190
+---the daq queue length before the crash was 2
+---the temperature before the crash was 65.95037841796875
+---the rate before the crash was 765
+---the lost rate before the crash was 48
+---the elapsed time before the crash was 527
+---the num. events received before the crash was 374230
+---the event queue size before the crash was 0
+---the num. unsent events before the crash was 0
+---the num. missed events before the crash was 11033
+---the MTEvent receiver len. before the crash was 381468
+---the RBEvent receiver len. before the crash was 1137907
+---the num. MTEvents skipped before the crash was 10997
+---the num. timed out events before the crash was 35453
+---the cache size before the crash was 5043
+---the event ID cache size before the crash was 5043
+---the vcc aux before the crash was 3.69580078125
+---the vcc bram before the crash was 1.93798828125
+---the vcc int before the crash was 1.9365234375
+-------------------------------------------------------------------------------------------
+from 1733563443.384 to 1733563907.512 with duration 464.12800002098083
+------tiu_ignore_busy = True------
+---the tiu_busy_count before the crash was 101990
+---the daq queue length before the crash was 8191
+---the temperature before the crash was 66.07342529296875
+---the rate before the crash was 718
+---the lost rate before the crash was 70
+---the elapsed time before the crash was 542
+---the num. events received before the crash was 385072
+---the event queue size before the crash was 0
+---the num. unsent events before the crash was 0
+---the num. missed events before the crash was 11041
+---the MTEvent receiver len. before the crash was 388680
+---the RBEvent receiver len. before the crash was 1159989
+---the num. MTEvents skipped before the crash was 11000
+---the num. timed out events before the crash was 36092
+---the cache size before the crash was 5035
+---the event ID cache size before the crash was 5035
+---the vcc aux before the crash was 3.7001953125
+---the vcc bram before the crash was 1.939453125
+---the vcc int before the crash was 1.939453125
+-------------------------------------------------------------------------------------------
+from 1733564347.576 to 1733564441.464 with duration 93.88800001144409
+------tiu_ignore_busy = True------
+---the tiu_busy_count before the crash was 411210
+---the daq queue length before the crash was 2
+---the temperature before the crash was 65.95037841796875
+---the rate before the crash was 726
+---the lost rate before the crash was 66
+---the elapsed time before the crash was 450
+---the num. events received before the crash was 335025
+---the event queue size before the crash was 0
+---the num. unsent events before the crash was 0
+---the num. missed events before the crash was 143
+---the MTEvent receiver len. before the crash was 335036
+---the RBEvent receiver len. before the crash was 974965
+---the num. MTEvents skipped before the crash was 104
+---the num. timed out events before the crash was 41036
+---the cache size before the crash was 4489
+---the event ID cache size before the crash was 4489
+---the vcc aux before the crash was 3.7001953125
+---the vcc bram before the crash was 1.939453125
+---the vcc int before the crash was 1.93798828125
+-------------------------------------------------------------------------------------------
+from 1733605845.112 to 1733606024.184 with duration 179.07200002670288
+------tiu_ignore_busy = False------
+---the tiu_busy_count before the crash was 101960
+---the daq queue length before the crash was 0
+---the temperature before the crash was 54.138458251953125
+---the rate before the crash was 767
+---the lost rate before the crash was 302
+---the elapsed time before the crash was 41400
+---the num. events received before the crash was 29980066
+---the event queue size before the crash was 0
+---the num. unsent events before the crash was 0
+---the num. missed events before the crash was 10805
+---the MTEvent receiver len. before the crash was 29980464
+---the RBEvent receiver len. before the crash was 94753922
+---the num. MTEvents skipped before the crash was 7648
+---the num. timed out events before the crash was 3735107
+---the cache size before the crash was 4501
+---the event ID cache size before the crash was 4501
+---the vcc aux before the crash was 3.70166015625
+---the vcc bram before the crash was 1.939453125
+---the vcc int before the crash was 1.939453125
+-------------------------------------------------------------------------------------------
+from 1733606101.24 to 1733606289.272 with duration 188.03200006484985
+------tiu_ignore_busy = False------
+---the tiu_busy_count before the crash was 157190
+---the daq queue length before the crash was 2
+---the temperature before the crash was 54.261505126953125
+---the rate before the crash was 761
+---the lost rate before the crash was 278
+---the elapsed time before the crash was 75
+---the num. events received before the crash was 57107
+---the event queue size before the crash was 0
+---the num. unsent events before the crash was 0
+---the num. missed events before the crash was 27
+---the MTEvent receiver len. before the crash was 60841
+---the RBEvent receiver len. before the crash was 150075
+---the num. MTEvents skipped before the crash was 23
+---the num. timed out events before the crash was 15417
+---the cache size before the crash was 4450
+---the event ID cache size before the crash was 4450
+---the vcc aux before the crash was 3.7001953125
+---the vcc bram before the crash was 1.94091796875
+---the vcc int before the crash was 1.939453125
+-------------------------------------------------------------------------------------------
+from 1733607169.464 to 1733607429.368 with duration 259.904000043869
+------tiu_ignore_busy = False------
+---the tiu_busy_count before the crash was 101990
+---the daq queue length before the crash was 1
+---the temperature before the crash was 54.753662109375
+---the rate before the crash was 727
+---the lost rate before the crash was 272
+---the elapsed time before the crash was 885
+---the num. events received before the crash was 643865
+---the event queue size before the crash was 0
+---the num. unsent events before the crash was 0
+---the num. missed events before the crash was 220
+---the MTEvent receiver len. before the crash was 647564
+---the RBEvent receiver len. before the crash was 2035344
+---the num. MTEvents skipped before the crash was 153
+---the num. timed out events before the crash was 46939
+---the cache size before the crash was 4410
+---the event ID cache size before the crash was 4410
+---the vcc aux before the crash was 3.7001953125
+---the vcc bram before the crash was 1.939453125
+---the vcc int before the crash was 1.939453125
+-------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------

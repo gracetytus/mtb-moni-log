@@ -1,0 +1,27 @@
+the start time was 2024-12-01 00:00:00 UTC and the first MTBMoniData was received 2024-11-30 23:59:56 UTC
+the end time was 2024-12-01 23:59:59 UTC and the last MTBMoniData was received 2024-12-01 19:24:11 UTC
+--------------------------------------------------------------------------------------------
+Detected 1 MTB outages with length greater than 60 seconds between 1733011200 to 1733097599 seconds
+from 1733041681.144 to 1733045047.288 with duration 3366.1440000534058
+------tiu_ignore_busy = True------
+---the tiu_busy_count before the crash was 0
+---the daq queue length before the crash was 0
+---the temperature before the crash was 60.04443359375
+---the rate before the crash was 257
+---the lost rate before the crash was 27
+---the elapsed time before the crash was 35987
+---the num. events received before the crash was 9527473
+---the event queue size before the crash was 0
+---the num. unsent events before the crash was 0
+---the num. missed events before the crash was 8039
+---the MTEvent receiver len. before the crash was 9528444
+---the RBEvent receiver len. before the crash was 28369875
+---the num. MTEvents skipped before the crash was 6745
+---the num. timed out events before the crash was 333052
+---the cache size before the crash was 3862
+---the event ID cache size before the crash was 3862
+---the vcc aux before the crash was 3.69580078125
+---the vcc bram before the crash was 1.93798828125
+---the vcc int before the crash was 1.9365234375
+-------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
